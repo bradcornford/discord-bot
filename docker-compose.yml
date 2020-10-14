@@ -1,0 +1,21 @@
+version: "3"
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  bot:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: bradcornford/discord-bot:latest
+    container_name: bot
+    working_dir: /usr/src/app
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      TZ: "Europe/London"
+    env_file:
+      - .env
+    restart: unless-stopped
